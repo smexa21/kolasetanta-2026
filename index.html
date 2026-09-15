@@ -282,8 +282,9 @@
         container.appendChild(backBtn);
 
         // Three.js Setup
+        const isMobile = window.innerWidth < 768;
         let scene, camera, renderer, composer, fireworks = [], animationId;
-        const numHeart = 750; // Reduced particles for performance
+        const numHeart = isMobile ? 300 : 750; // Drastically reduced for mobile performance
         let heartGeo, heartPos, heartTarget, heartStates, heartSpeeds, heartSystem;
         let nameSprites = [];
         let fireworkInterval;
@@ -314,21 +315,23 @@
 
             renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+            renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5));
             renderer.toneMapping = THREE.ReinhardToneMapping;
 
             particleContainer.innerHTML = ''; // clear old canvas if any
             particleContainer.appendChild(renderer.domElement);
 
             // Post Processing (Bloom)
-            const renderScene = new RenderPass(scene, camera);
-            const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-            bloomPass.threshold = 0.05;
-            bloomPass.strength = 1.4; // Intensity of glow
-            bloomPass.radius = 0.6;
-            composer = new EffectComposer(renderer);
-            composer.addPass(renderScene);
-            composer.addPass(bloomPass);
+            if (!isMobile) {
+                const renderScene = new RenderPass(scene, camera);
+                const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+                bloomPass.threshold = 0.05;
+                bloomPass.strength = 1.4; // Intensity of glow
+                bloomPass.radius = 0.6;
+                composer = new EffectComposer(renderer);
+                composer.addPass(renderScene);
+                composer.addPass(bloomPass);
+            }
 
             particleSprite = createParticleTexture();
 
@@ -345,11 +348,12 @@
                 heartsContainer.appendChild(heart);
                 setTimeout(() => { if (heart.parentNode) heart.remove(); }, 7000);
             }
-            window.cssHeartInterval = setInterval(createCSSHeart, 300);
+            window.cssHeartInterval = setInterval(createCSSHeart, isMobile ? 800 : 300);
 
             // Spawn CSS Twinkling Stars
             const starsContainer = document.getElementById('stars-container');
-            for (let i = 0; i < 150; i++) {
+            const numStars = isMobile ? 50 : 150;
+            for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + 'vw';
