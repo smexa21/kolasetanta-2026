@@ -332,40 +332,57 @@ body{
     }
     
     .container .slide .item {
-        width: 100px;
-        height: 150px;
-        top: 80%;
+        width: 90px;
+        height: 135px;
+        top: 75%;
     }
     
+    /* Restore main image full size */
+    .slide .item:nth-child(1),
+    .slide .item:nth-child(2) {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0;
+    }
+
     .slide .item:nth-child(3) { left: 10px; }
-    .slide .item:nth-child(4) { left: 120px; }
-    .slide .item:nth-child(5) { left: 230px; }
-    .slide .item:nth-child(n + 6) { left: 340px; }
+    .slide .item:nth-child(4) { left: 110px; }
+    .slide .item:nth-child(5) { left: 210px; }
+    .slide .item:nth-child(n + 6) { left: 310px; }
 
     .item .content {
         left: 20px;
+        top: 40%;
         width: calc(100vw - 40px);
+        background: rgba(0, 0, 0, 0.4);
+        padding: 15px;
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
     }
 
-    .item .name { font-size: 30px; }
-    .item .des { font-size: 14px; }
+    .item .name { font-size: 26px; }
+    .item .des { font-size: 13px; }
 
     .sensus {
-        font-size: 1.2rem;
-        top: 40px;
+        font-size: 1.1rem;
+        top: 60px;
         text-align: center;
         width: 100%;
+        padding: 0 10px;
     }
     .terimakasih {
-        font-size: 3rem;
-        top: 90px;
+        font-size: 2.2rem;
+        top: 100px;
         text-align: center;
         width: 100%;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
+        padding: 0 10px;
     }
 
     .button {
-        bottom: 30px;
+        bottom: 20px;
         text-align: center;
         width: 100%;
     }

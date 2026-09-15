@@ -422,7 +422,7 @@
                 "Rizaldi", "Rina", "Novita Sari", "Inayah", "Norliana",
                 "Hilda", "Siti Norhafizah", "Bambang", "Ratmilia", "Mini Rahmiyanti",
                 "Nispi Syahrisa", "Deni Aditya Rahman", "Sri Noor Lita Sari", "Mila sari", "Nita Surilah",
-                "Erni Erli Yanti", "Riska Yulianti", "Muhammad Jaini", "Normalia Rasyidah", "Ulfah", "image1 (1)",
+                "Erni Erli Yanti", "Riska Yulianti", "Muhammad Jaini", "Normalia Rasyidah", "Ulfah",
             ];
 
             nameSprites = [];
@@ -453,7 +453,7 @@
                 sprite.renderOrder = 1; // Behind heart
 
                 const angle = Math.random() * Math.PI * 2;
-                const radius = 60 + Math.random() * 80; // 60 to 140 radius
+                const radius = isMobile ? (40 + Math.random() * 40) : (60 + Math.random() * 80); // Tighter radius on mobile
                 const yHeight = (Math.random() - 0.5) * 150; // Random heights
 
                 sprite.userData = {
