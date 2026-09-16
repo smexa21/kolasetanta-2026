@@ -351,9 +351,14 @@ window.addEventListener('resize', () => {
 initThreeJS();
 animate();
 
-enterBtn.addEventListener('click', () => {
-    introScreen.style.opacity = '0';
-    setTimeout(() => {
+        enterBtn.addEventListener('click', () => {
+            const bgMusic = document.getElementById('bg-music');
+            if (bgMusic && bgMusic.paused) {
+                bgMusic.play().catch(e => console.log("Audio play failed:", e));
+            }
+
+            introScreen.style.opacity = '0';
+            setTimeout(() => {
         introScreen.style.display = 'none';
         container.style.display = 'block';
         cancelAnimationFrame(animationId);
